@@ -1,0 +1,210 @@
+{% load static%}
+<style>
+  * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: "Lato", sans-serif;
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: -1;
+      opacity: 0;
+      transition: 1s all;
+    }
+    
+    .navbar {
+      display: flex;
+      align-items: center;
+      width: 100vw;
+      background-color: #fff;
+      box-shadow: 0px 10px 10px 3px rgba(0, 0, 0, 0.3);
+      position: relative;
+      padding: 0px 70px;
+      background-color: #fff;
+    }
+    .navbar-logo {
+      color: #ff3f34;
+      text-decoration: none;
+      font-size: 25px;
+      padding: 0px 20px;
+    }
+    
+    .navbar-links {
+      list-style-type: none;
+      display: flex;
+    }
+    .navbar-links li a {
+      display: block;
+      text-decoration: none;
+      color: #444;
+      padding: 20px 20px;
+      font-weight: 700;
+      transition: 0.4s all;
+    }
+    
+    .navbar-links li.navbar-dropdown {
+      position: relative;
+    }
+    
+    .navbar-links li.navbar-dropdown:hover .dropdown {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    
+    .navbar-links li.navbar-dropdown .dropdown {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      padding: 20px 0;
+      top: 100%;
+      transform: translateY(50px);
+      left: 0;
+      width: 250px;
+      background-color: #fff;
+      box-shadow: 0px 10px 10px 3px rgba(0, 0, 0, 0.3);
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      z-index: 111;
+      transition: 0.4s all;
+    }
+    .navbar-links li.navbar-dropdown .dropdown a {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-weight: 400;
+    }
+    .navbar-dropdown .dropdown a:hover {
+      padding-left: 30px;
+    }
+    .navbar-links li a:hover {
+      color: #ff3f34;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 90vh;
+      /* background-color: #f00; */
+      background-image: url("http://lorempixel.com/1366/698/food/");
+      background-size: cover;
+    }
+    
+    .header-inner {
+      text-align: center;
+      color: #ff3f34;
+      text-shadow: 0px 10px 10px rgba(0, 0, 0, .8);
+    }
+    
+    .header-inner h1 {
+      font-family: "Great Vibes", cursive;
+      font-size: 130px;
+    }
+    
+    .header-inner form input[type="search"] {
+      position: relative;
+      width: 500px;
+      border: none;
+      padding: 15px;
+      border-radius: 27px;
+      box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
+      z-index: 11;
+    }
+    .header-inner form input[type="search"]:focus {
+      outline: none;
+    }
+    
+    .header-inner form input[type="search"]:focus + div {
+      z-index: 1;
+      opacity: 1;
+    }
+    
+    ::placeholder {
+      color: #666;
+      font-weight: 400;
+    }
+
+</style>
+<body>
+  <div class="scrolling-container">
+    <div class="scrolling-text">
+      DAIRY DELIGHT Milk is a fundamental liquid food produced by mammals, renowned for its nutritional richness and versatility.
+    </div>
+  </div>
+  <nav class="navbar">
+      <form class="d-flex input-group w-auto">
+          <input
+            type="search"
+            class="form-control rounded"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+          />
+          <span class="input-group-text border-0" id="search-addon">
+            <i class="fas fa-search"></i>
+          </span>
+        </form>
+        {% if request.user.is_authenticated %}
+      <ul class="navbar-links">
+        <li class="navbar-dropdown">
+          <a href="{% url 'Home'%}">Home</a>
+          
+        </li>
+        <li class="navbar-dropdown">
+          <a href="#">Products</a>
+          <div class="dropdown">
+            <a href="{% url 'category' 'Milk'%}">Milk</a>
+            <a href="{% url 'category' 'Curd'%}">Curd</a>
+            <a href="{% url 'category' 'Milkshake'%}">Milkshake</a>
+            <a href="{% url 'category' 'Lassi'%}">Lassi</a>
+            <a href="{% url 'category' 'Ghee'%}">Ghee</a>
+            <a href="{% url 'category' 'Paneer'%}">Paneer</a>
+            <a href="{% url 'category' 'Chesse'%}">Chesse</a>
+            <a href="{% url 'category' 'Ice-Cream'%}">Ice-Cream</a>
+          </div>
+        </li>
+        <li class="navbar-dropdown">
+          <a href="{% url 'about'%}">About us</a>
+         
+        </li>
+        <li class="navbar-dropdown">
+          <a href="{% url 'contact'%}">Contact us</a>
+          
+        </li>
+       <li class="navbar-dropdown">
+          <a href="#">Aniket</a>
+          <div class="dropdown">
+            <a href="{% url 'profile'%}">Profile</a>
+            <a href="{% url 'orders'%}">Orders</a>
+            <a href="{% url 'passwordchange' %}">Change Password</a>
+            <a href="{% url 'logout' %}">Logout</a>
+          </div>
+        </li> 
+        
+        <li class="navbar-dropdown">
+          <a href="#"><i class="fa-solid fa-circle-chevron-down"></i></a>
+          <div class="dropdown">
+            <a href="{% url 'showcart'%}" class="nav-link text-white"><span class="badge-bg-danger">{% if totalitem > 0 %} {{totalitem}}{%endif %}</span>Cart</a>
+            <a href="#">Wishlist</a>
+            {%else%}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'customerregistration' %}">Register As a New User</a>
+          </div>
+        </li>
+        {%endif%}
+          </div>
+        </li>
+      </ul>
+    </nav>
+

@@ -1,0 +1,23 @@
+
+{% extends 'index.html'%}
+{% block content%}
+
+<div class="card-group">
+
+    <div class="card">
+        {% for prod in product %}
+        <div class="">
+            <a href="{% url 'product-detail' prod.id %}" class='btn'>
+        <div>
+        <img src ="{{prod.product_image.url}}" width="300px" height="200px"/>
+      <div class="card-body">
+        <div class="fw-bold">{{prod.title}}</div>
+        <div class ="fw-bold text-danger">
+            Rs.{{prod.discounted_price}}/-
+             <small class="fw-light text-decoration-line-through">{{prod.selling_price}}</small>
+      </div>
+    </div>
+    </div>
+    {%endfor%}
+</div>
+{%endblock%}

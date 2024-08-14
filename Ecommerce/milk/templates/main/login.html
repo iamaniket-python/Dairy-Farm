@@ -1,0 +1,49 @@
+
+{% extends 'index.html'%}
+{% block content%}
+{%load static%}
+
+<div class="container mt-5">
+<div class="card text-center">
+  <div class="card-header">
+    <main role="main" >
+
+      <div style="text-align: center; " class="">
+        <h2 style="font-size: 2rem; font-weight: 600; font-family: Playfair Display, serif; color:orange;">Login</h2>
+       
+      </div>
+    
+    </main>
+  </div>
+  <div class="card-body">
+    <from action="" method="post">
+      {% csrf_token %}
+      {% for fm in form%}
+      {{fm.label_tag}} {{fm}}<small class= 'text-danger'>{{fm.errors|striptags}}</small>
+    {% endfor %}
+    <small><a href="{% url 'password_reset' %}" style="color:orange;">Forgot Password? </a></small>
+   <br>
+   <input type="submit" class="btn btn-primary mt-4" value="login">
+   <div class="text-center text-primary fw-bold">
+    <small>New User? <a href="{% url 'customerregistration' %}" style="color:orange;">Create an Account</a></small>
+
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors%}
+      <p class="alert alert danger my-3">{{error}}</p>
+      {% endfor %}
+    {% endif %}
+    
+
+
+    </form>
+
+
+    
+  </div>
+ 
+</div>
+
+
+
+{%endblock%}
+
